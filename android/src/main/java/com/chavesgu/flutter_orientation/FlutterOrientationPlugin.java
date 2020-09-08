@@ -1,6 +1,7 @@
 package com.chavesgu.flutter_orientation;
 
 import android.app.Activity;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -34,7 +35,7 @@ public class FlutterOrientationPlugin implements FlutterPlugin, MethodCallHandle
     channel.setMethodCallHandler(this);
   }
   public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "chavesgu/flutter_orientation");
+    final MethodChannel channel = new MethodChannel(registrar.messenger(), "chavesgu/orientation");
     channel.setMethodCallHandler(new FlutterOrientationPlugin());
   }
 
@@ -56,17 +57,25 @@ public class FlutterOrientationPlugin implements FlutterPlugin, MethodCallHandle
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
     if (call.method.equals("setOrientation")) {
+      if (activity==null) {
+        Log.i("Orientation", "activity is null");
+      }
       Object arguments = call.arguments;
       String orientation = (String) arguments;
       if (orientation.equals("DeviceOrientation.portraitUp")) {
+//        Log.i("Orientation", "portraitUp");
         activity.setRequestedOrientation(SCREEN_ORIENTATION_PORTRAIT);
       } else if (orientation.equals("DeviceOrientation.portraitDown")) {
+//        Log.i("Orientation", "portraitDown");
         activity.setRequestedOrientation(SCREEN_ORIENTATION_REVERSE_PORTRAIT);
       } else if (orientation.equals("DeviceOrientation.landscapeLeft")) {
+//        Log.i("Orientation", "landscapeLeft");
         activity.setRequestedOrientation(SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
       } else if (orientation.equals("DeviceOrientation.landscapeRight")) {
+//        Log.i("Orientation", "landscapeRight");
         activity.setRequestedOrientation(SCREEN_ORIENTATION_LANDSCAPE);
       } else {
+//        Log.i("Orientation", "other");
         activity.setRequestedOrientation(SCREEN_ORIENTATION_UNSPECIFIED);
       }
     } else {
