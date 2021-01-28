@@ -1,3 +1,3 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+support android/ios rotate device orientation
