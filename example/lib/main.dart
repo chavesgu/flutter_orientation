@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
 import 'package:flutter/services.dart';
 import 'package:flutter_orientation/flutter_orientation.dart';
 
@@ -14,11 +12,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,12 +25,12 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: RaisedButton(
+          child: ElevatedButton(
             child: Text('rotate'),
             onPressed: () {
               if (MediaQuery.of(context).orientation == Orientation.portrait) {
                 FlutterOrientation.setOrientation(DeviceOrientation.landscapeRight);
-              } else{
+              } else {
                 FlutterOrientation.setOrientation(DeviceOrientation.portraitUp);
               }
             },
